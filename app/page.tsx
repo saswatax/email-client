@@ -21,6 +21,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 
+import AccountSwitcher from "./components/account-switcher";
+import NavBar from "./components/nav-bar";
+
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export default function Home() {
@@ -39,38 +42,9 @@ export default function Home() {
         className="w-screen rounded-lg border"
       >
         <ResizablePanel defaultSize={20}>
-          <div className="flex h-full flex-col items-center justify-center p-6">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">Open</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                  checked={showStatusBar}
-                  onCheckedChange={setShowStatusBar}
-                >
-                  Status Bar
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={showActivityBar}
-                  onCheckedChange={setShowActivityBar}
-                  disabled
-                >
-                  Activity Bar
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={showPanel}
-                  onCheckedChange={setShowPanel}
-                >
-                  Panel
-                </DropdownMenuCheckboxItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Separator />
-            <Button>ast</Button>
-          </div>
+          <AccountSwitcher />
+          <Separator />
+          <NavBar />
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={40}>
