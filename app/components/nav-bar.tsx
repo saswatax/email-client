@@ -20,11 +20,11 @@ interface Props {
 
 export default function MavBar({ isCollapsed }: Props) {
   return (
-    <div>
+    <section className="flex-1">
       <NavSegment navList={navTop} isCollapsed={isCollapsed} />
       <Separator />
       <NavSegment navList={navBottom} isCollapsed={isCollapsed} />
-    </div>
+    </section>
   );
 }
 

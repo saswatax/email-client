@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { ModeToggle } from "@/components/mode-toggle";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -8,6 +7,7 @@ import {
 } from "@/components/ui/resizable";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import AccountSwitcher from "./components/account-switcher";
@@ -22,7 +22,6 @@ export default function Home() {
 
   return (
     <main id="app">
-      {/* <ModeToggle /> */}
       <ResizablePanelGroup
         style={{
           height: "100vh",
@@ -39,6 +38,7 @@ export default function Home() {
           onCollapse={() => setIsCollapsed(true)}
           onExpand={() => setIsCollapsed(false)}
           className={cn(
+            "flex flex-col",
             isCollapsed &&
               "min-w-[50px] transition-all duration-300 ease-in-out",
           )}
@@ -46,6 +46,7 @@ export default function Home() {
           <AccountSwitcher isCollapsed={isCollapsed} />
           <Separator />
           <NavBar isCollapsed={isCollapsed} />
+          <ModeToggle />
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel minSize={30} defaultSize={40}>
