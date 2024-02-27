@@ -1,35 +1,18 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-
+import { cn } from "@/lib/utils";
 import AccountSwitcher from "./components/account-switcher";
 import NavBar from "./components/nav-bar";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"];
-
 export default function Home() {
-  const [showStatusBar, setShowStatusBar] = useState<Checked>(true);
-  const [showActivityBar, setShowActivityBar] = useState<Checked>(false);
-  const [showPanel, setShowPanel] = useState<Checked>(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <main id="app">
@@ -41,10 +24,22 @@ export default function Home() {
         direction="horizontal"
         className="w-screen rounded-lg border"
       >
-        <ResizablePanel defaultSize={20}>
-          <AccountSwitcher />
+        <ResizablePanel
+          defaultSize={20}
+          collapsedSize={4}
+          collapsible={true}
+          minSize={15}
+          maxSize={20}
+          onCollapse={() => setIsCollapsed(true)}
+          onExpand={() => setIsCollapsed(false)}
+          className={cn(
+            isCollapsed &&
+              "min-w-[50px] transition-all duration-300 ease-in-out",
+          )}
+        >
+          <AccountSwitcher isCollapsed={isCollapsed} />
           <Separator />
-          <NavBar />
+          <NavBar isCollapsed={isCollapsed} />
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={40}>

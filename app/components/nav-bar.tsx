@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   AlertCircle,
   Archive,
@@ -6,44 +5,30 @@ import {
   File,
   Inbox,
   MessagesSquare,
-  PenBox,
-  Search,
   Send,
   ShoppingCart,
   Trash2,
   Users2,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import NavSegment from "./nav-segment";
+import type { Nav } from "@/types/type";
 
-export default function MavBar() {
+interface Props {
+  isCollapsed: boolean;
+}
+
+export default function MavBar({ isCollapsed }: Props) {
   return (
     <div>
-      {navTop.map((nav, index) => (
-        <Link
-          className={cn(buttonVariants({ variant: nav.variant }))}
-          key={index}
-          href="#"
-        >
-          <nav.icon />
-          {nav.title}
-          {nav.label}
-        </Link>
-      ))}
+      <NavSegment navList={navTop} isCollapsed={isCollapsed} />
       <Separator />
-      {navBottom.map((nav, index) => (
-        <Link key={index} href="#">
-          <nav.icon />
-          {nav.title}
-          {nav.label}
-        </Link>
-      ))}
+      <NavSegment navList={navBottom} isCollapsed={isCollapsed} />
     </div>
   );
 }
 
-const navTop = [
+const navTop: Array<Nav> = [
   {
     title: "Inbox",
     label: "128",
@@ -82,7 +67,7 @@ const navTop = [
   },
 ];
 
-const navBottom = [
+const navBottom: Array<Nav> = [
   {
     title: "Social",
     label: "972",
