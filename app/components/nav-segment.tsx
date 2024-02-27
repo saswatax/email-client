@@ -47,16 +47,26 @@ export default function NavSegment({ navList, isCollapsed }: Props) {
             <Link
               key={index}
               className={cn(
-                buttonVariants({ variant: nav.variant }),
-                "flex justify-between",
+                buttonVariants({ variant: nav.variant, size: "sm" }),
+                nav.variant === "default" &&
+                  "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
+                "justify-start",
               )}
               href="#"
             >
-              <div className="flex items-center gap-2">
-                <nav.icon className="h-4 w-4" />
-                {nav.title}
-              </div>
-              {nav.label}
+              <nav.icon className="mr-2 h-4 w-4" />
+              {nav.title}
+              {nav.label && (
+                <span
+                  className={cn(
+                    "ml-auto",
+                    nav.variant === "default" &&
+                      "text-background dark:text-white",
+                  )}
+                >
+                  {nav.label}
+                </span>
+              )}
             </Link>
           ),
         )}
